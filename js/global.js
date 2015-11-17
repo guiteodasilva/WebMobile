@@ -17,7 +17,7 @@ var modulo = function()
 				{
 					
 					
-					var row = $("<tr id='row_"+i+"'>");
+					var row = $("<tr id='row_"+i+"' class='dados'>");
 					var cols  = "";
 					
 					cols += "<td>"+results[i].user.registered+"</td>";
@@ -44,53 +44,72 @@ var modulo = function()
 	
 	var recarregar = function()
 	{		
-	
 		
-		console.log(results);
-	
-		$( "#listaDados tr" ).remove();
+		$( "#listaDados tr.dados" ).remove();
 		
 		for(var i=0; i<results.length; i++) 
 		{
+			if(typeof results[i] != 'undefined' )
+			{
 			
-			
-			var row = $("<tr id='row_"+i+"'>");
-			var cols  = "";
-			
-			cols += "<td>"+results[i].user.registered+"</td>";
-			cols += "<td>"+results[i].user.name.first+"</td>";
-			cols += "<td>"+results[i].user.email+"</td>";
-			cols += "<td> <img src='"+results[i].user.picture.thumbnail+"' /> </td>";
-			
-			cols += "<td> <button type='button' class='btn blue' onclick='modulo.consultar("+i+")' >Consultar</button> </td>";
-			cols += "<td> <button type='button' class='btn yellow' onclick='modulo.editar("+i+")'>Editar</button> </td>";
-			cols += "<td> <button type='button' class='btn red' onclick='modulo.apagar("+i+")'>Apagar</button> </td>";
-							
-			row.append(cols);
-			
-			$("#listaDados").append(row);
-			
-			//console.log(i, results[i].user.email); // i é o índice, matriz[i] é o valor
+				var row = $("<tr id='row_"+i+"' class='dados'>");
+				var cols  = "";
+				
+				cols += "<td>"+results[i].user.registered+"</td>";
+				cols += "<td>"+results[i].user.name.first+"</td>";
+				cols += "<td>"+results[i].user.email+"</td>";
+				cols += "<td> <img src='"+results[i].user.picture.thumbnail+"' /> </td>";
+				
+				cols += "<td> <button type='button' class='btn blue' onclick='modulo.consultar("+i+")' >Consultar</button> </td>";
+				cols += "<td> <button type='button' class='btn yellow' onclick='modulo.editar("+i+")'>Editar</button> </td>";
+				cols += "<td> <button type='button' class='btn red' onclick='modulo.apagar("+i+")'>Apagar</button> </td>";
+								
+				row.append(cols);
+				
+				$("#listaDados").append(row);
+				
+				//console.log(i, results[i].user.email); // i é o índice, matriz[i] é o valor
+			}
+		}
+		
+		var rowCount = $('#listaDados tr.dados').length;
+				
+		if(rowCount == 0)
+		{
+			$( "#listaDados" ).hide();
+			$( "#noRow" ).show();
 		}
 	
 		
 	}
 	
+	
+	var novoDados = function()
+	{		
+		$.ajax({
+			url: 'http://api.randomuser.me/?results=1',
+			dataType: 'json',
+			success: function(data)
+			{
+						
+				var resultsNovo = data.results;
+				
+				$('#novaFoto').attr("src",resultsNovo[0].user.picture.thumbnail);
+				$('#photo').val(resultsNovo[0].user.picture.thumbnail);
+				$('#registered').val(resultsNovo[0].user.registered);
+				
+			}
+			
+		});
+		
+	}
+	
 	var apagarDados = function(i)
 	{
-				
+		
 		delete results[i];
 		
-		
-		$( "#row_"+i ).remove();
-		
-		var rowCount = $('#listaDados tr').length;
-		
-		if(rowCount == 1)
-		{
-			$( "#listaDados" ).hide();
-			$( "#noRow" ).show();
-		}
+		recarregar();
 		
 	}
 	
@@ -135,6 +154,36 @@ var modulo = function()
 		
 	}
 	
+	
+	var incluirDados = function(i)
+	{
+		
+		$( "#incluir" ).show();
+		$( "#listaDados" ).hide();
+		$( "#novoCadastro" ).hide();
+		
+		
+		
+		novoDados();
+		
+	}
+	
+	
+	var inclusaoDados = function(i)
+	{
+		
+		$( "#incluir" ).hide();
+		$( "#listaDados" ).show();
+		$( "#novoCadastro" ).show();
+		
+		
+		
+		
+		
+		
+	}
+	
+	
 	var alteracaoDados = function()
 	{
 		
@@ -173,6 +222,9 @@ var modulo = function()
 		$( "#alterar" ).hide();
 		$( "#listaDados" ).show();
 		
+		$( "#novoCadastro" ).show();
+		$( "#incluir" ).hide();
+		
 		
 		$( "#name" ).val('');
 		$( "#gender" ).val('');
@@ -210,6 +262,14 @@ var modulo = function()
 		alteracao: function() 
 		{ 
             alteracaoDados(); 
+        },
+		incluir: function(i) 
+		{ 
+            incluirDados(i); 
+        },
+		inclusao: function(i) 
+		{ 
+            inclusaoDados(i); 
         },
 		voltar: function(i) 
 		{ 
