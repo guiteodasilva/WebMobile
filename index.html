@@ -59,7 +59,7 @@
         	<h2> Consultar </h2>
             <p> Pagina para consulta de informações completas </p>
             
-            <form role="form" action="#">
+            <form>
             
                 <div class="form-group">
                     <label class="control-label">name</label>
@@ -139,7 +139,7 @@
         	<h3> Edição </h3>
             <p> Pagina para alteração de dados </p>
             
-            <form role="form" action="#" onsubmit="modulo.alteracao()">
+            <form onsubmit="return modulo.alteracao()">
             
             	<input type="hidden" name="id" id="id" />
             
@@ -160,7 +160,7 @@
                 
                 <div class="form-group">
                     <label class="control-label">gender</label>
-                    <input type="email" id="gender" name="gender" placeholder="gender" class="form-control" required="required"/>
+                    <input type="text" id="gender" name="gender" placeholder="gender" class="form-control" required="required"/>
                 </div>
                 
                 <hr />
@@ -224,11 +224,11 @@
         	<h3> Incluir </h3>
             <p> Pagina para inclusão de dados </p>
             
-            <form action="#" onsubmit="modulo.inclusao()">
+            <form onsubmit="return modulo.inclusao();">
                             
                 <div class="form-group">
                     <label class="control-label">id</label>
-                    <input type="text" disabled="disabled" name="registered" id="registered" placeholder="registered" class="form-control" required="required"/>
+                    <input type="text" disabled="disabled" name="inc_registered" id="inc_registered" placeholder="registered" class="form-control" required="required"/>
                 </div>
                 
                 <div class="form-group">
@@ -236,27 +236,27 @@
                     
                     <img id="novaFoto" src=""/>
                     
-                    <input type="hidden" name="photo" id="photo" placeholder="photo" class="form-control" required="required"/>
+                    <input type="hidden" name="inc_photo" id="inc_photo" placeholder="photo" class="form-control" required="required"/>
                 </div>
             
                 <div class="form-group">
                     <label class="control-label">name</label>
-                    <input type="text" name="name" id="name" placeholder="name" class="form-control" required="required"/>
+                    <input type="text" name="inc_name" id="inc_name" placeholder="name" class="form-control" required="required"/>
                 </div>
                 
                 <div class="form-group">
                     <label class="control-label">email</label>
-                    <input type="email" id="email" name="email" placeholder="email" class="form-control" required="required"/>
+                    <input type="email" id="inc_email" name="inc_email" placeholder="email" class="form-control" required="required"/>
                 </div>
                 
                 <div class="form-group">
                     <label class="control-label">password</label>
-                    <input type="password" id="password" name="password" placeholder="password" class="form-control" required="required"/>
+                    <input type="password" id="inc_password" name="inc_password" placeholder="password" class="form-control" required="required"/>
                 </div>
                 
                 <div class="form-group">
                     <label class="control-label">gender</label>
-                    <input type="email" id="gender" name="gender" placeholder="gender" class="form-control" required="required"/>
+                    <input type="text" id="inc_gender" name="inc_gender" placeholder="gender" class="form-control" required="required"/>
                 </div>
                 
                 <hr />
@@ -267,22 +267,22 @@
                 
                 <div class="form-group">
                     <label class="control-label">street</label>
-                    <input type="text" id="street" name="street" placeholder="street" class="form-control" required="required"/>
+                    <input type="text" id="inc_street" name="inc_street" placeholder="street" class="form-control" required="required"/>
                 </div>
                 
                 <div class="form-group">
                     <label class="control-label">city</label>
-                    <input type="text" id="city" name="city" placeholder="city" class="form-control" required="required"/>
+                    <input type="text" id="inc_city" name="inc_city" placeholder="city" class="form-control" required="required"/>
                 </div>
                 
                 <div class="form-group">
                     <label class="control-label">state</label>
-                    <input type="text" id="state" name="state" placeholder="state" class="form-control" required="required"/>
+                    <input type="text" id="inc_state" name="inc_state" placeholder="state" class="form-control" required="required"/>
                 </div>
                 
                 <div class="form-group">
                     <label class="control-label">zip</label>
-                    <input type="text" id="zip" name="zip" placeholder="zip" class="form-control" required="required"/>
+                    <input type="text" id="inc_zip" name="inc_zip" placeholder="zip" class="form-control" required="required"/>
                 </div>
                 
                 
@@ -294,13 +294,13 @@
                 
                 <div class="form-group">
                     <label class="control-label">phone</label>
-                    <input type="tel" id="phone" name="phone" placeholder="phone" class="form-control" required="required"/>
+                    <input type="tel" id="inc_phone" name="inc_phone" placeholder="phone" class="form-control" required="required"/>
                 </div>
                 
                 
                 <div class="form-group">
                     <label class="control-label">cell</label>
-                    <input type="tel" id="cell" name="cell" placeholder="cell" class="form-control" required="required"/>
+                    <input type="tel" id="inc_cell" name="inc_cell" placeholder="cell" class="form-control" required="required"/>
                 </div>
                 
                 <hr />

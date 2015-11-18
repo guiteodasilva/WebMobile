@@ -79,13 +79,28 @@ var modulo = function()
 			$( "#listaDados" ).hide();
 			$( "#noRow" ).show();
 		}
-	
+			
 		
 	}
 	
 	
 	var novoDados = function()
-	{		
+	{	
+		$( "#inc_name" ).val('');
+		$( "#inc_gender" ).val('');
+		$( "#inc_email" ).val('');
+		$( "#inc_street" ).val('');
+		$( "#inc_city" ).val('');
+		$( "#inc_state" ).val('');
+		$( "#inc_zip" ).val('');
+		$( "#inc_password" ).val('');
+		$( "#inc_phone" ).val('');
+		$( "#inc_cell" ).val('');
+		$( "#inc_registered" ).val('');
+		$( "#inc_photo" ).val('');
+		$('#novaFoto').attr("src","");
+		
+		
 		$.ajax({
 			url: 'http://api.randomuser.me/?results=1',
 			dataType: 'json',
@@ -95,9 +110,9 @@ var modulo = function()
 				var resultsNovo = data.results;
 				
 				$('#novaFoto').attr("src",resultsNovo[0].user.picture.thumbnail);
-				$('#photo').val(resultsNovo[0].user.picture.thumbnail);
-				$('#registered').val(resultsNovo[0].user.registered);
-				
+				$('#inc_photo').val(resultsNovo[0].user.picture.thumbnail);
+				$('#inc_registered').val(resultsNovo[0].user.registered);
+								
 			}
 			
 		});
@@ -175,11 +190,44 @@ var modulo = function()
 		$( "#incluir" ).hide();
 		$( "#listaDados" ).show();
 		$( "#novoCadastro" ).show();
+				
 		
+		var str = $( "#inc_name" ).val();
+		var res = str.split(" ");
+				
+		var users = {
+			user:
+			{
+			  name: {
+				first: res[0],
+				last: str.replace(res[0], "").trim()
+			  },
+			  gender: $( "#inc_gender" ).val(),
+			  email: $( "#inc_email" ).val(),
+			  location: {
+				  
+				 street: $( "#inc_street" ).val(),
+				 city: $( "#inc_city" ).val(),
+				 state: $( "#inc_state" ).val(),
+				 zip: $( "#inc_zip" ).val()
+				  
+			  },
+			  password: $( "#inc_password" ).val(),
+			  phone: $( "#inc_phone" ).val(),
+			  cell: $( "#inc_cell" ).val(),
+			  picture: 
+			  {
+				  thumbnail: $( "#inc_photo" ).val()
+			  },
+			  registered: $( "#inc_registered" ).val()
+			}
+		}
 		
+		results[results.length] = users;
 		
+		recarregar();
 		
-		
+		return false;
 		
 	}
 	
@@ -210,6 +258,8 @@ var modulo = function()
 		
 				
 		recarregar();
+		
+		return false;
 		
 		
 	}
@@ -261,7 +311,7 @@ var modulo = function()
         },
 		alteracao: function() 
 		{ 
-            alteracaoDados(); 
+            return alteracaoDados(); 
         },
 		incluir: function(i) 
 		{ 
@@ -269,7 +319,7 @@ var modulo = function()
         },
 		inclusao: function(i) 
 		{ 
-            inclusaoDados(i); 
+            return inclusaoDados(i); 
         },
 		voltar: function(i) 
 		{ 
