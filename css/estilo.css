@@ -1,0 +1,206 @@
+
+body
+{
+	background: #f1f3fa;
+	font-family: Verdana, Geneva, sans-serif;
+}
+
+header h1
+{
+	text-align:center;
+	color: #323c45;
+}
+
+footer
+{
+	text-align:center;
+}
+
+h2
+{
+	color: #323c45;
+	border-bottom: 2px solid #323c45;
+}
+
+h5, h3
+{
+	color: #966;
+}
+
+h3
+{
+	text-transform:capitalize;
+}
+
+.control-label
+{
+	color:#F96;
+	font-weight: normal;
+	text-transform:capitalize;
+}
+
+.form-group
+{
+	margin-top: 20px;
+}
+
+hr
+{
+	
+	border: 0px;
+	border-top: 1px dashed #966;
+  	color: #fff;
+  	background: #fff;
+ 	height: 4px;
+	margin-top: 30px;
+}
+
+.widget
+{
+	
+  border-radius: 20px;
+  background: #fff;
+  padding: 20px;
+  margin: 20px;
+  
+}
+
+
+table 
+{ 
+  width: 100%; 
+  border-collapse: collapse;
+  background: #fff;
+  margin-bottom: 30px;
+}
+
+th 
+{ 
+  background: #f3565d; 
+  color: white; 
+  font-weight: bold; 
+}
+
+td, th 
+{ 
+  padding: 6px; 
+  border: 1px solid #f3565d;
+  
+  text-align:center;
+}
+
+input[type=button], input[type=submit], button
+{
+	border-width: 0;
+    padding: 7px 14px;
+    font-size: 14px;
+	cursor: pointer;
+	border-radius: 20px;
+	margin: 10px auto;
+	display: block;
+	
+}
+
+.form-control
+{
+	display: block;
+	padding: 10px;
+	width: 95%;
+	margin-top: 10px;
+}
+
+.blue {
+    color: #FFFFFF;
+    background-color: #3598dc;
+}
+
+.red {
+    color: #FFFFFF;
+    background-color: #c23f44;
+}
+
+.yellow {
+    color: #FFFFFF;
+    background-color: #c49f47;
+}
+
+.black {
+    color: #FFFFFF;
+    background-color: #323c45;
+}
+
+.blue:hover {
+    color: #FFFFFF;
+    background-color: #2386ca;
+}
+
+.red:hover {
+    color: #FFFFFF;
+    background-color: #CC3300;
+}
+
+.yellow:hover {
+    color: #FFFFFF;
+    background-color: #af8c38;
+}
+
+.black:hover {
+    color: #FFFFFF;
+    background-color: #333333;
+}
+
+@media 
+only screen and (max-width: 760px),
+(min-device-width: 768px) and (max-device-width: 1024px)  {
+
+	table, thead, tbody, th, td, tr { 
+		display: block; 
+	}
+	
+	thead tr { 
+		position: absolute;
+		top: -9999px;
+		left: -9999px;
+	}
+	
+	
+	td { 
+		border: none;
+		position: relative;
+		padding-left: 50%; 
+		text-align: center;
+		
+	}
+	
+	td:before { 
+		position: absolute;
+		top: 6px;
+		left: 6px;
+		width: 45%; 
+		padding-right: 10px; 
+		white-space: nowrap;
+		font-weight: bold;
+		
+	}
+	
+	
+	td.ult
+	{
+		
+		border-bottom: 2px solid #eee; 
+		padding-bottom: 20px;
+		padding-top: 20px;
+	}
+	td:nth-of-type(1):before { content: "Foto"; }
+	td:nth-of-type(2):before { content: "Id"; }
+	td:nth-of-type(3):before { content: "Nome"; }
+	td:nth-of-type(5):before { content: ""; }
+}
+
+@media (min-width: 992px)
+{
+	.col-md-6 {
+		width: 50%;
+		float: left;
+	}
+}

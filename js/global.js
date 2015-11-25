@@ -13,29 +13,12 @@ var modulo = function()
 						
 				results = data.results;
 				
-				for(var i=0; i<results.length; i++) 
-				{
-					
-					
-					var row = $("<tr id='row_"+i+"' class='dados'>");
-					var cols  = "";
-					
-					cols += "<td>"+results[i].user.registered+"</td>";
-					cols += "<td>"+results[i].user.name.first+"</td>";
-					cols += "<td>"+results[i].user.email+"</td>";
-					cols += "<td> <img src='"+results[i].user.picture.thumbnail+"' /> </td>";
-					
-					cols += "<td> <button type='button' class='btn blue' onclick='modulo.consultar("+i+")' >Consultar</button> </td>";
-					cols += "<td> <button type='button' class='btn yellow' onclick='modulo.editar("+i+")'>Editar</button> </td>";
-					cols += "<td> <button type='button' class='btn red' onclick='modulo.apagar("+i+")'>Apagar</button> </td>";
-									
-					row.append(cols);
-					
-					$("#listaDados").append(row);
-					
-					//console.log(i, results[i].user.email); // i é o índice, matriz[i] é o valor
-				}
+				var source   = $("#listaDados-template").html();
+				var template = Handlebars.compile(source);
+				$("#listaDados-view").html(template(results)) ;
 				
+				
+								
 			}
 			
 		});
@@ -47,38 +30,27 @@ var modulo = function()
 		
 		$( "#listaDados tr.dados" ).remove();
 		
-		for(var i=0; i<results.length; i++) 
-		{
-			if(typeof results[i] != 'undefined' )
-			{
-			
-				var row = $("<tr id='row_"+i+"' class='dados'>");
-				var cols  = "";
+		var source   = $("#listaDados-template").html();
+		var template = Handlebars.compile(source);
+		$("#listaDados-view").html(template(results)) ;
 				
-				cols += "<td>"+results[i].user.registered+"</td>";
-				cols += "<td>"+results[i].user.name.first+"</td>";
-				cols += "<td>"+results[i].user.email+"</td>";
-				cols += "<td> <img src='"+results[i].user.picture.thumbnail+"' /> </td>";
-				
-				cols += "<td> <button type='button' class='btn blue' onclick='modulo.consultar("+i+")' >Consultar</button> </td>";
-				cols += "<td> <button type='button' class='btn yellow' onclick='modulo.editar("+i+")'>Editar</button> </td>";
-				cols += "<td> <button type='button' class='btn red' onclick='modulo.apagar("+i+")'>Apagar</button> </td>";
-								
-				row.append(cols);
-				
-				$("#listaDados").append(row);
-				
-				//console.log(i, results[i].user.email); // i é o índice, matriz[i] é o valor
-			}
-		}
-		
 		var rowCount = $('#listaDados tr.dados').length;
-				
+						
 		if(rowCount == 0)
 		{
 			$( "#listaDados" ).hide();
 			$( "#noRow" ).show();
 		}
+		else
+		{
+			$( "#listaDados" ).show();
+			$( "#noRow" ).hide();
+		}
+		
+		$( "#consultar" ).hide();
+		$( "#alterar" ).hide();
+		$( "#incluir" ).hide();
+		$( "#novoCadastro" ).show();
 			
 		
 	}
@@ -132,7 +104,11 @@ var modulo = function()
 	{
 		
 		$( "#consultar" ).show();
-		$( "#listaDados" ).hide();
+		$('body').scrollTop(parseInt($("#dadosLocal").offset().top));	
+		
+		//$( "#listaDados" ).hide();
+		$( "#incluir" ).hide();
+		$( "#alterar" ).hide();
 		
 		$( "#lb_name" ).html(results[i].user.name.first + ' ' + results[i].user.name.last);
 		$( "#lb_gender" ).html(results[i].user.gender);
@@ -147,13 +123,19 @@ var modulo = function()
 		
 		
 		
+		
+		
 	}
 	
 	var editarDados = function(i)
 	{
 		
 		$( "#alterar" ).show();
-		$( "#listaDados" ).hide();
+		$('body').scrollTop(parseInt($("#dadosLocal").offset().top));	
+		
+		//$( "#listaDados" ).hide();
+		$( "#incluir" ).hide();
+		$( "#consultar" ).hide();
 		
 		$( "#id" ).val(i);
 		$( "#name" ).val(results[i].user.name.first + ' ' + results[i].user.name.last);
@@ -174,9 +156,13 @@ var modulo = function()
 	{
 		
 		$( "#incluir" ).show();
-		$( "#listaDados" ).hide();
-		$( "#novoCadastro" ).hide();
+		$('body').scrollTop(parseInt($("#dadosLocal").offset().top));	
 		
+		$( "#alterar" ).hide();
+		$( "#consultar" ).hide();
+		//$( "#listaDados" ).hide();
+		//$( "#novoCadastro" ).hide();
+		//$( "#noRow" ).hide();
 		
 		
 		novoDados();
@@ -186,11 +172,6 @@ var modulo = function()
 	
 	var inclusaoDados = function(i)
 	{
-		
-		$( "#incluir" ).hide();
-		$( "#listaDados" ).show();
-		$( "#novoCadastro" ).show();
-				
 		
 		var str = $( "#inc_name" ).val();
 		var res = str.split(" ");
@@ -235,8 +216,6 @@ var modulo = function()
 	var alteracaoDados = function()
 	{
 		
-		$( "#alterar" ).hide();
-		$( "#listaDados" ).show();
 		
 		var id = $( "#id" ).val();
 		
@@ -270,10 +249,10 @@ var modulo = function()
 		
 		$( "#consultar" ).hide();
 		$( "#alterar" ).hide();
-		$( "#listaDados" ).show();
-		
-		$( "#novoCadastro" ).show();
 		$( "#incluir" ).hide();
+		$( "#novoCadastro" ).show();
+		
+		recarregar();
 		
 		
 		$( "#name" ).val('');
